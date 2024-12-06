@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>User - GroupLottery</title>
+	<meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+	<link rel="icon" th:href="@{/admin/assets/img/kaiadmin/favicon.ico}" type="image/x-icon" />
+
+	<!-- Fonts and icons -->
+	<script th:src="@{/admin/assets/js/plugin/webfont/webfont.min.js}"></script>
+	<script>
+		WebFont.load({
+			google: {families: ["Public Sans:300,400,500,600,700"]},
+			custom: {
+				families: [
+					"Font Awesome 5 Solid",
+					"Font Awesome 5 Regular",
+					"Font Awesome 5 Brands",
+					"simple-line-icons",
+				],
+				urls: ["/admin/assets/css/fonts.min.css"],
+			},
+			active: function () {
+				sessionStorage.fonts = true;
+			},
+		});
+	</script>
+
+	<!-- CSS Files -->
+	<link rel="stylesheet" th:href="@{/admin/assets/css/bootstrap.min.css}" />
+	<link rel="stylesheet" th:href="@{/admin/assets/css/plugins.min.css}" />
+	<link rel="stylesheet" th:href="@{/admin/assets/css/kaiadmin.min.css}" />
+	<link href="https://cdn.jsdelivr.net/npm/jquery-toast-plugin@1.3.2/dist/jquery.toast.min.css" rel="stylesheet">
+
+
+	<!-- My css -->
+	<link rel="stylesheet" th:href="@{/admin/assets/css/styles.css}" />
+
+</head>
+
+<body>
+	<div class="wrapper">
+		<!-- Sidebar -->
+		<div th:replace="admin/fragments/sidebar :: sidebar"></div>
+		<!-- End Sidebar -->
+
+		<div class="main-panel">
+			<div th:replace="admin/fragments/header :: header"></div>
+			<div class="container">
+				<div class="page-inner">
+					<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+						<h3 class="fw-bold mb-3">Người dùng</h3>
+						<ul class="breadcrumbs mb-3">
+							<li class="nav-home">
+								<a href="/admin">
+									<i class="icon-home"></i>
+								</a>
+							</li>
+							<li class="separator">
+								<i class="icon-arrow-right"></i>
+							</li>
+							<li class="nav-item">
+								<a href="/admin/user">Người dùng</a>
+							</li>
+						</ul>
+
+					</div>
+					<!-- Content -->
+					<div class="row">
+						<div class="card">
+							<div class="card-header d-flex justify-content-between">
+								<div class="card-title">Bảng người dùng</div>
+								<button type="button" class="btn btn-primary btn-round" data-bs-toggle="modal"
+									data-bs-target="#modal-create">
+									<i class="fas fa-plus-circle"></i>
+									Thêm
+								</button>
+								<div class="modal fade" id="modal-create" data-bs-backdrop="static"
+									data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+									<div class="modal-dialog modal-xl modal-dialog-scrollable">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h1 class="modal-title fs-5">Thêm người dùng</h1>
+												<button type="button" class="btn-close" data-bs-dismiss="modal"
+													aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<form id="create-user-form" action="">
+													<div class="row mb-3">
+														<div class="col-12 col-md-6">
+															<div class="form-group">
+																<label>Họ và tên đệm</label>
+																<input type="text" class="form-control"
+																	autocomplete="off" name="surname">
+															</div>
+														</div>
+														<div class="col-12 col-md-6">
+															<div class="form-group">
+																<label>Tên</label>
+																<input type="text" class="form-control"
+																	autocomplete="off" name="name">
+															</div>
+														</div>
+													</div>
+													<div class="row mb-3">
+														<div class="col-12 col-md-6">
+															<div class="form-group">
+																<label>Email</label>
+																<input type="email" class="form-control"
+																	autocomplete="off" name="email">
+															</div>
+														</div>
+														<div class="col-12 col-md-6">
+															<div class="form-group">
+																<label>Mật khẩu</label>
+																<input type="password" class="form-control"
+																	autocomplete="off" name="password">
+															</div>
+														</div>
+													</div>
+													<div class="row mb-3">
+														<div class="col-12 col-md-6">
+															<div class="form-group">
+																<label>Địa chỉ</label>
+																<input type="text" class="form-control"
+																	autocomplete="off" name="address">
+															</div>
+														</div>
+														<div class="col-12 col-md-6">
+															<div class="form-group">
+																<label>Số điện thoại</label>
+																<input type="text" class="form-control"
+																	autocomplete="off" name="phone">
+															</div>
+														</div>
+													</div>
+													<div class="row mb-3">
+														<div class="col-12 col-md-6">
+															<div class="form-group">
+																<label>Giới tính</label>
+																<select class="form-select form-control" name="gender">
+																	<option value="" disabled selected>Chọn giới tính
+																	</option>
+																	<option value="male">Nam</option>
+																	<option value="female">Nữ</option>
+																</select>
+															</div>
+														</div>
+														<div class="col-12 col-md-6">
+															<div class="form-group">
+																<label>Trạng thái</label>
+																<select class="form-select form-control" name="status">
+																	<option value="" disabled selected>Chọn trạng thái
+																	</option>
+																	<option value="active">Hoạt động</option>
+																	<option value="baned">Chặn</option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="row mb-3">
+														<div class="col-12 col-md-6">
+															<div class="form-group">
+																<label>Ngày sinh</label>
+																<input type="date" class="form-control"
+																	name="date_of_birth">
+															</div>
+														</div>
+														<div class="col-12 col-md-6">
+															<div class="form-group">
+																<label>Vai trò</label>
+																<select class="form-select form-control" name="role">
+																	<option value="" disabled selected>Chọn vai trò
+																	</option>
+																	<option value="1">Admin</option>
+																	<option value="2">User</option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="row mb-3">
+														<div class="col-12 col-md-6">
+															<div class="form-group">
+																<label class="form-label">Ảnh đại diện</label>
+																<input class="form-control avatar-input" type="file"
+																	accept=".png, .jpg, .jpeg" name="avatar" />
+															</div>
+														</div>
+													</div>
+													<div class="row mb-3">
+														<div class="col-12">
+															<div class="avatarPreviewContainer">
+																<img class="mx-auto img-fluid avatarPreview"
+																	style="max-height: 250px; display: none;"
+																	alt="avatar preview" />
+															</div>
+														</div>
+													</div>
+												</form>
+											</div>
+											<div class="modal-footer">
+												<button id="btn-resest" type="button" class="btn btn-secondary me-2"><i
+														class="fas fa-redo-alt"></i> Đặt
+													lại</button>
+												<button id="btn-create-user" type="button" class="btn btn-primary"
+													data-bs-dismiss="modal"><i class="fas fa-user-plus"></i>
+													Tạo</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="card-body">
+								<table id="userTable" class="display table table-striped table-hover w-100">
+									<thead>
+										<tr>
+											<th>ID</th>
+											<th>Avatar</th>
+											<th>Họ</th>
+											<th>Tên</th>
+											<th>Trạng thái</th>
+											<th>Vai trò</th>
+											<th>Lần sửa cuối</th>
+											<th>Lần dùng cuối</th>
+											<th>Hành động</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+							<div class="modal fade" id="userInfoModal" data-bs-backdrop="true" data-bs-keyboard="false"
+								tabindex="-1" aria-hidden="true">
+								<div class="modal-dialog modal-xl modal-dialog-scrollable">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h1 class="modal-title fs-5">Thông tin người dùng</h1>
+											<button type="button" class="btn-close" data-bs-dismiss="modal"
+												aria-label="Close"></button>
+										</div>
+										<div class="modal-body">
+											<form id="update-user-form" action="">
+												<div class="row mb-3">
+													<div class="col-12 col-md-6">
+														<div class="form-group">
+															<label>Họ và tên đệm</label>
+															<input type="text" class="form-control" autocomplete="off"
+																name="surname" />
+														</div>
+													</div>
+													<div class="col-12 col-md-6">
+														<div class="form-group">
+															<label>Tên</label>
+															<input type="text" class="form-control" autocomplete="off"
+																name="name" />
+														</div>
+													</div>
+												</div>
+												<div class="row mb-3">
+													<div class="col-12 col-md-6">
+														<div class="form-group">
+															<label>Email</label>
+															<input type="email" class="form-control" autocomplete="off"
+																name="email" />
+														</div>
+													</div>
+													<div class="col-12 col-md-6">
+														<div class="form-group">
+															<label>Địa chỉ</label>
+															<input type="text" class="form-control" autocomplete="off"
+																name="address" />
+														</div>
+													</div>
+												</div>
+												<div class="row mb-3">
+													<div class="col-12 col-md-6">
+														<div class="form-group">
+															<label>Số điện thoại</label>
+															<input type="text" class="form-control" autocomplete="off"
+																name="phone" />
+														</div>
+													</div>
+													<div class="col-12 col-md-6">
+														<div class="form-group">
+															<label>Giới tính</label>
+															<select class="form-select form-control" name="gender">
+																<option value="" disabled selected>Chọn giới tính
+																</option>
+																<option value="male">Nam</option>
+																<option value="female">Nữ</option>
+															</select>
+														</div>
+													</div>
+												</div>
+												<div class="row mb-3">
+													<div class="col-12 col-md-6">
+														<div class="form-group">
+															<label>Trạng thái</label>
+															<select class="form-select form-control" name="status">
+																<option value="" disabled selected>Chọn trạng thái
+																</option>
+																<option value="active">Hoạt động</option>
+																<option value="baned">Chặn</option>
+															</select>
+														</div>
+													</div>
+													<div class="col-12 col-md-6">
+														<div class="form-group">
+															<label>Ngày sinh</label>
+															<input type="date" class="form-control"
+																name="date_of_birth" />
+														</div>
+													</div>
+												</div>
+												<div class="row mb-3">
+													<div class="col-12 col-md-6">
+														<div class="form-group">
+															<label>Khởi tạo</label>
+															<input disabled type="datetime-local"
+																class="form-control" />
+														</div>
+													</div>
+													<div class="col-12 col-md-6">
+														<div class="form-group">
+															<label>Cập nhật</label>
+															<input disabled type="datetime-local"
+																class="form-control" />
+														</div>
+													</div>
+												</div>
+												<div class="row mb-3">
+													<div class="col-12 col-md-6">
+														<div class="form-group">
+															<label>Vai trò</label>
+															<select class="form-select form-control" name="role">
+																<option value="" disabled selected>Chọn vai trò</option>
+																<option value="1">Admin</option>
+																<option value="2">User</option>
+															</select>
+														</div>
+													</div>
+													<div class="col-12 col-md-6">
+														<div class="form-group">
+															<label class="form-label">Ảnh đại diện</label>
+															<input class="form-control avatar-input" type="file"
+																accept=".png, .jpg, .jpeg" name="avatar" />
+														</div>
+													</div>
+												</div>
+												<div class="row mb-3">
+													<div class="col-12">
+														<div class="avatarPreviewContainer">
+															<img class="mx-auto img-fluid avatarPreview"
+																style="max-height: 250px; display: none;"
+																alt="avatar preview" />
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+										<div class="modal-footer">
+											<button id="btn-resest-infor" type="button"
+												class="btn btn-secondary me-2"><i class="fas fa-redo-alt"></i> Đặt
+												lại</button>
+											<button id="btn-edit-user" type="button" class="btn btn-warning text-white"
+												data-bs-dismiss="modal">
+												<i class="fas fa-user-edit"></i>
+												Sửa
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div th:replace="admin/fragments/footer :: footer"></div>
+		</div>
+	</div>
+	<!--   Core JS Files   -->
+	<script th:src="@{/admin/assets/js/core/jquery-3.7.1.min.js}"></script>
+	<script th:src="@{/admin/assets/js/core/popper.min.js}"></script>
+	<script th:src="@{/admin/assets/js/core/bootstrap.min.js}"></script>
+
+	<!-- jQuery Scrollbar -->
+	<script th:src="@{/admin/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
+
+	<!-- Chart JS -->
+	<script th:src="@{/admin/assets/js/plugin/chart.js/chart.min.js}"></script>
+
+	<!-- jQuery Sparkline -->
+	<script th:src="@{/admin/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js}"></script>
+
+	<!-- Chart Circle -->
+	<script th:src="@{/admin/assets/js/plugin/chart-circle/circles.min.js}"></script>
+
+	<!-- Datatables -->
+	<script th:src="@{/admin/assets/js/plugin/datatables/datatables.min.js}"></script>
+
+	<!-- Bootstrap Notify -->
+	<script th:src="@{/admin/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js}"></script>
+
+	<!-- jQuery Vector Maps -->
+	<script th:src="@{/admin/assets/js/plugin/jsvectormap/jsvectormap.min.js}"></script>
+	<script th:src="@{/admin/assets/js/plugin/jsvectormap/world.js}"></script>
+
+	<!-- Sweet Alert -->
+	<script th:src="@{/admin/assets/js/plugin/sweetalert/sweetalert.min.js}"></script>
+
+	<!-- Kaiadmin JS -->
+	<script th:src="@{/admin/assets/js/kaiadmin.min.js}"></script>
+
+	<!-- Toast Jquery Plugin -->
+	<script src="
+	https://cdn.jsdelivr.net/npm/jquery-toast-plugin@1.3.2/dist/jquery.toast.min.js"></script>
+
+	<!-- My js -->
+	<script th:src="@{/admin/assets/js/util.js}"></script>
+
+	<!-- Ajax js -->
+	<script th:src="@{/admin/assets/js/ajaxUser.js}"></script>
+
+</body>
+
+</html>
