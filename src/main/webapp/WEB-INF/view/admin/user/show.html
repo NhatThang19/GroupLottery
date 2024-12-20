@@ -11,7 +11,7 @@
 	<script th:src="@{/admin/assets/js/plugin/webfont/webfont.min.js}"></script>
 	<script>
 		WebFont.load({
-			google: {families: ["Public Sans:300,400,500,600,700"]},
+			google: { families: ["Public Sans:300,400,500,600,700"] },
 			custom: {
 				families: [
 					"Font Awesome 5 Solid",
@@ -33,7 +33,6 @@
 	<link rel="stylesheet" th:href="@{/admin/assets/css/kaiadmin.min.css}" />
 	<link href="https://cdn.jsdelivr.net/npm/jquery-toast-plugin@1.3.2/dist/jquery.toast.min.css" rel="stylesheet">
 
-
 	<!-- My css -->
 	<link rel="stylesheet" th:href="@{/admin/assets/css/styles.css}" />
 
@@ -45,12 +44,14 @@
 		<div th:replace="admin/fragments/sidebar :: sidebar"></div>
 		<!-- End Sidebar -->
 
+		<!-- Main -->
 		<div class="main-panel">
 			<div th:replace="admin/fragments/header :: header"></div>
 			<div class="container">
 				<div class="page-inner">
 					<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
 						<h3 class="fw-bold mb-3">Người dùng</h3>
+						<!-- Breadcrumbs -->
 						<ul class="breadcrumbs mb-3">
 							<li class="nav-home">
 								<a href="/admin">
@@ -64,7 +65,7 @@
 								<a href="/admin/user">Người dùng</a>
 							</li>
 						</ul>
-
+						<!-- End breadcrumbs -->
 					</div>
 					<!-- Content -->
 					<div class="row">
@@ -200,7 +201,7 @@
 												</form>
 											</div>
 											<div class="modal-footer">
-												<button id="btn-resest" type="button" class="btn btn-secondary me-2"><i
+												<button id="btn-reset" type="button" class="btn btn-secondary me-2"><i
 														class="fas fa-redo-alt"></i> Đặt
 													lại</button>
 												<button id="btn-create-user" type="button" class="btn btn-primary"
@@ -228,6 +229,27 @@
 									</thead>
 									<tbody>
 									</tbody>
+									<tfoot>
+										<tr>
+											<th colspan="4"></th>
+											<th>
+												<select class="form-select form-control" id="statusFilter">
+													<option value="" selected>Lọc</option>
+													<option value="active">Hoạt động</option>
+													<option value="baned">Chặn</option>
+												</select>
+											</th>
+											<th>
+												<select class="form-select form-control" id="roleFilter">
+													<option value="" selected="">Lọc
+													</option>
+													<option value="1">ADMIN</option>
+													<option value="2">USER</option>
+												</select>
+											</th>
+											<th colspan="3"></th>
+										</tr>
+									</tfoot>
 								</table>
 							</div>
 							<div class="modal fade" id="userInfoModal" data-bs-backdrop="true" data-bs-keyboard="false"
@@ -235,12 +257,15 @@
 								<div class="modal-dialog modal-xl modal-dialog-scrollable">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h1 class="modal-title fs-5">Thông tin người dùng</h1>
+											<h1 class="modal-title fs-5">Thông tin người dùng id: <span
+													class="title-id"></span></h1>
 											<button type="button" class="btn-close" data-bs-dismiss="modal"
 												aria-label="Close"></button>
 										</div>
 										<div class="modal-body">
 											<form id="update-user-form" action="">
+												<input type="text" class="form-control d-none" autocomplete="off"
+													name="id" />
 												<div class="row mb-3">
 													<div class="col-12 col-md-6">
 														<div class="form-group">
@@ -344,14 +369,14 @@
 														<div class="form-group">
 															<label class="form-label">Ảnh đại diện</label>
 															<input class="form-control avatar-input" type="file"
-																accept=".png, .jpg, .jpeg" name="avatar" />
+																accept=".png, .jpg, .jpeg" name="avatarInfor" />
 														</div>
 													</div>
 												</div>
 												<div class="row mb-3">
 													<div class="col-12">
 														<div class="avatarPreviewContainer">
-															<img class="mx-auto img-fluid avatarPreview"
+															<img class="mx-auto img-fluid avatarPreviewInfor"
 																style="max-height: 250px; display: none;"
 																alt="avatar preview" />
 														</div>
@@ -360,9 +385,6 @@
 											</form>
 										</div>
 										<div class="modal-footer">
-											<button id="btn-resest-infor" type="button"
-												class="btn btn-secondary me-2"><i class="fas fa-redo-alt"></i> Đặt
-												lại</button>
 											<button id="btn-edit-user" type="button" class="btn btn-warning text-white"
 												data-bs-dismiss="modal">
 												<i class="fas fa-user-edit"></i>
@@ -376,8 +398,11 @@
 					</div>
 				</div>
 			</div>
+			<!-- Footer -->
 			<div th:replace="admin/fragments/footer :: footer"></div>
+			<!-- End footer -->
 		</div>
+		<!-- End main -->
 	</div>
 	<!--   Core JS Files   -->
 	<script th:src="@{/admin/assets/js/core/jquery-3.7.1.min.js}"></script>
@@ -421,7 +446,6 @@
 
 	<!-- Ajax js -->
 	<script th:src="@{/admin/assets/js/ajaxUser.js}"></script>
-
 </body>
 
 </html>

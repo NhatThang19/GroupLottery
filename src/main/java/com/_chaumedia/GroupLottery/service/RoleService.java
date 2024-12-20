@@ -19,8 +19,9 @@ public class RoleService {
     public Role findRoleByName(String name) {
         return this.roleRepository.findByName(name);
     }
-    
-    public Optional findRoleById(Long id) {
+
+    @SuppressWarnings("unchecked")
+    public Optional<Role> findRoleById(Long id) {
         return this.roleRepository.findById(id);
     }
 

@@ -3,10 +3,6 @@ package com._chaumedia.GroupLottery.model.DTO;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import com._chaumedia.GroupLottery.model.Role;
-import com._chaumedia.GroupLottery.model.User.Gender;
-import com._chaumedia.GroupLottery.model.User.Status;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -26,5 +22,5 @@ public class UserDTO {
 	private String avatar;
 	private LocalDateTime last_login;
 	private String address;
-	private String role;
+	private long role;
 }
